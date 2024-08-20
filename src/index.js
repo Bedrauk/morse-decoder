@@ -38,8 +38,22 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+        let message = '';
+        
+        for (let i = 0; i < expr.length; i += 6) {
+            const binarySegment = expr.slice(i, i + 6);
+            if (!binarySegment.includes('*')) {
+                message += binaryToChar(binarySegment);
+            }
+        }
+        
+        return message;
+    
 }
+const expr = "00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010";
+        
+
+console.log(decode(expr))
 
 module.exports = {
     decode
