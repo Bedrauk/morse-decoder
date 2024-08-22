@@ -35,25 +35,22 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '**********': ' '
 };
 
 function decode(expr) {
-        let message = '';
+        let result = '';
         
-        for (let i = 0; i < expr.length; i += 6) {
-            const binarySegment = expr.slice(i, i + 6);
-            if (!binarySegment.includes('*')) {
-                message += binaryToChar(binarySegment);
-            }
+        for (let i = 0; i < expr.length; i += 10) {
+            const chunk = expr.slice(i, i + 10);
+            
+            const morseCode = chunk.replace(/10/g, '.').replace(/11/g, '-').replace(/0/g, '');
+    
+            result += MORSE_TABLE[morseCode] || '';
         }
         
-        return message;
-    
+        return result;
 }
-const expr = "00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010";
-        
-
-console.log(decode(expr))
 
 module.exports = {
     decode
